@@ -1,0 +1,46 @@
+.contacts-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__item {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-around;
+        &--submit {
+            margin: 15px;
+            width: 70px;
+            height: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 20px;
+            background: lightgreen;
+            color: ghostwhite;
+        }
+        &--close {
+            // margin: 15px;
+            width: 70px;
+            height: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 20px;
+            background: lightcoral;
+            color: ghostwhite;
+            float: right;
+        }
+        &--error {
+            color: red;
+        }
+    }
+}
+
+input {
+    background: antiquewhite;
+    border: none;
+    width: 300px;
+    line-height: 26px;
+    font-size: 16px;
+    border-bottom: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 9px 0 0 5px;
+}
