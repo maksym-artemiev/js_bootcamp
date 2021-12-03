@@ -1,0 +1,43 @@
+<form class="contacts-form" [formGroup]="form" (submit)="onSubmit($event)">
+        <div class="contacts-form__item">
+            <label class="contacts-form__item--label"
+                [hidden]="form.get('name')?.touched && !form.get('name')?.valid">
+                Your full name*
+            </label>
+            <label class="contacts-form__item--error"
+                [hidden]="!form.get('name')?.touched || form.get('name')?.valid">
+                Enter your name* Min. 3 symbols and only letters*
+            </label>
+            <input formControlName="name" class="contacts-form__item--input" type="text"
+                name="name" placeholder="Ex.: Maksym Artemiev..."/>
+        </div>
+        <div class="contacts-form__item">
+            <label class="contacts-form__item--label"
+                [hidden]="form.get('title')?.touched && !form.get('title')?.valid">
+                Title of your new post*
+            </label>
+            <label class="contacts-form__item--error"
+                [hidden]="!form.get('title')?.touched || form.get('title')?.valid">
+                Write your title. Min. 10 symbols*
+            </label>
+            <input formControlName="title" class="contacts-form__item--input" type="text"
+                name="title" placeholder="Write your title"/>
+        </div>
+        <div class="contacts-form__item">
+            <label class="contacts-form__item--label"
+                [hidden]="form.get('about')?.touched && !form.get('about')?.valid">
+                Your news for publishing*
+            </label>
+            <label class="contacts-form__item--error"
+                [hidden]="!form.get('about')?.touched || form.get('about')?.valid">
+                Write your post! No empty field*
+            </label>
+            <input formControlName="about" class="contacts-form__item--input" type="text"
+                name="about" placeholder="My new post about..."/>
+        </div>
+    <div class="contacts-form__item">
+        <button type="submit" class="contacts-form__item--submit"
+            [disabled]="form?.touched && !form?.valid">Send</button>
+    </div>
+</form>
+<button class="contacts-form__item--close" (click)="onNoClick()">Close</button>
