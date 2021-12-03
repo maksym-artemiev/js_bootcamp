@@ -10,8 +10,11 @@
                 <p class="author_date">{{today | date:'longDate'}}</p>
             </div>
         </div>
-        <div class="post__like">
+        <div 
+        class="post__like"
+        (click)="onClick(p)">
             <img src="\assets\thumb-up.png" alt="like">
+            <p class="post__like_number">{{ p.like }}</p>
         </div>
     </div>
     <div class="post__about">
