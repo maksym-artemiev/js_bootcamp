@@ -1,47 +1,70 @@
+.icon-like {
+  height: 16px;
+  width: 16px;
+  font-size: 16px;
+  color: rgb(166, 204, 30);
+}
+
+.author_icon {
+  height: 45px;
+  width: 45px;
+  font-size: 45px;
+}
+
 .post {
-    &__author {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        &_info {
-            margin-left: 20px;
-        }
+  &__author {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &_info {
+      margin-left: 20px;
     }
-    &__info {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
+  }
+  &__info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__like {
+    &_no {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-evenly;
+      background: white;
+      width: 45px;
+      text-align: center;
+      border: 1px solid gray;
+      border-radius: 8px;
+      height: 25px;
+      cursor: pointer;
     }
-    &__like {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-evenly;
-        background: lightyellow;
-        width: 45px;
-        text-align: center;
-        border: 0.5px solid linen;
-        border-radius: 8px;
-        height: 25px;
-        cursor: pointer;
-        &_number {
-            margin: 0;
-        }
+    &_is {
+      background: lightyellow;
+      border: 0.5px solid linen;
     }
-    &__about {
-        &_title {
-            margin: 0;
-        }
-        &_preview {
-            margin: 0;
-        }
+
+    &_number {
+      margin: 0;
     }
+  }
+  &__about {
+    &_read {
+      cursor: pointer;
+    }
+    &_title {
+      margin: 0;
+    }
+    &_preview {
+      margin: 0;
+    }
+  }
 }
 
 .author_name {
-    color: coral;
-    text-shadow: 0.5px 0.5px 1px black, 0 0 1px rgb(217, 0, 255), 0 0 0.2em rgb(195, 255, 0);
-    font-size: 19px;
-    margin: 0;
+  color: limegreen;
+  font-size: 19px;
+  font-weight: 500;
+  margin: 0;
 }

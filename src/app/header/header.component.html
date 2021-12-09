@@ -1,9 +1,13 @@
 <div class="header">
-<h2>My blog</h2>
+  <mat-toolbar class="mat-toolbar">
+    <h2>My blog</h2>
 
-<nav>
-    <a href="#">Home</a>
-    <a (click)="openDialog()"><img src="\assets\pencil.png" alt="new"> New Article</a>
-    <a href="#">User Name</a>
-</nav>
+    <nav>
+      <a href="#">Home</a>
+      <a (click)="openDialog()"
+        ><mat-icon class="icon-create">create</mat-icon>New Article</a
+      >
+      <a href="#">User Name</a>
+    </nav>
+  </mat-toolbar>
 </div>

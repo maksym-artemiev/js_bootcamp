@@ -10,6 +10,11 @@ import { MyBlogComponent } from './my-blog/my-blog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -18,15 +23,25 @@ import { ReactiveFormsModule } from '@angular/forms';
     PopularTagsComponent,
     PostsComponent,
     FormComponent,
-    MyBlogComponent
+    MyBlogComponent,
   ],
   imports: [
     BrowserModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatToolbarModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+  matButton: any;
+  matFormField: any;
+  matIcon: any;
+  matToolbar: any;
+}
