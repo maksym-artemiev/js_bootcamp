@@ -8,9 +8,8 @@ describe('PopularTagsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PopularTagsComponent ]
-    })
-    .compileComponents();
+      declarations: [PopularTagsComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

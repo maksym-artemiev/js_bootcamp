@@ -1,26 +1,28 @@
 <div *ngFor="let p of posts" class="post">
-    <hr>
-    <div class="post__info">
-        <div class="post__author">
-            <div class="post_author_pic">
-                <img src="\assets\emoji.png" alt="user">
-            </div>
-            <div class="post__author_info">
-                <p class="author_name">{{ p.name }}</p>
-                <p class="author_date">{{today | date:'longDate'}}</p>
-            </div>
-        </div>
-        <div 
-        class="post__like"
-        (click)="onClick(p)">
-            <img src="\assets\thumb-up.png" alt="like">
-            <p class="post__like_number">{{ p.like }}</p>
-        </div>
+  <hr />
+  <div class="post__info">
+    <div class="post__author">
+      <div class="post_author_pic">
+        <mat-icon class="author_icon">sentiment_very_satisfied</mat-icon>
+      </div>
+      <div class="post__author_info">
+        <p class="author_name">{{ p.name }}</p>
+        <p class="author_date">{{ today | date: "longDate" }}</p>
+      </div>
     </div>
-    <div class="post__about">
-        <h2 class="post__about_title">{{ p.title }}</h2>
-        <p class="post__about_preview">{{ p.about }}</p>
-        <br>
-        <p class="post__about_read">Read more...</p>
+    <div
+      [ngClass]="{ post__like_is: p.like >= 1 }"
+      class="post__like_no"
+      (click)="onClick(p)"
+    >
+      <mat-icon class="icon-like">thumb_up</mat-icon>
+      <p class="post__like_number">{{ p.like }}</p>
     </div>
+  </div>
+  <div class="post__about">
+    <h2 class="post__about_title">{{ p.title }}</h2>
+    <p class="post__about_preview">{{ p.about }}</p>
+    <br />
+    <p class="post__about_read">Read more...</p>
+  </div>
 </div>

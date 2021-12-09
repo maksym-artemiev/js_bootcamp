@@ -3,13 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-my-blog',
   templateUrl: './my-blog.component.html',
-  styleUrls: ['./my-blog.component.less']
+  styleUrls: ['./my-blog.component.less'],
 })
 export class MyBlogComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
