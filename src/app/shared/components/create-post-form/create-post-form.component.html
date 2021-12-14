@@ -8,8 +8,8 @@
         formControlName="name"
         required
       />
-      <mat-error *ngIf="form.get('name')?.status == 'INVALID'">{{
-        getErrorMessageA()
+      <mat-error *ngIf="isFormInvalid('name')">{{
+        getErrorMessage("name")
       }}</mat-error>
     </mat-form-field>
   </div>
@@ -22,8 +22,8 @@
         formControlName="title"
         required
       />
-      <mat-error *ngIf="form.get('title')?.status == 'INVALID'">{{
-        getErrorMessageB()
+      <mat-error *ngIf="isFormInvalid('title')">{{
+        getErrorMessage("title")
       }}</mat-error>
     </mat-form-field>
   </div>
@@ -36,8 +36,8 @@
         formControlName="about"
         required
       />
-      <mat-error *ngIf="form.get('about')?.status == 'INVALID'">{{
-        getErrorMessageC()
+      <mat-error *ngIf="isFormInvalid('about')">{{
+        getErrorMessage("about")
       }}</mat-error>
     </mat-form-field>
   </div>
@@ -56,7 +56,7 @@
   mat-stroked-button
   color="warn"
   class="contacts-form__item--close"
-  (click)="onNoClick()"
+  (click)="this.dialogRef.close()"
 >
   Close <mat-icon class="icon-close">clear</mat-icon>
 </button>
