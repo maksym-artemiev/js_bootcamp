@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { FormComponent } from '../form/form.component';
+import { PostFormComponent } from '../create-post-form/create-post-form.component';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +11,7 @@ export class HeaderComponent implements OnInit {
   constructor(public dialog: MatDialog) {}
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(FormComponent, {
+    const dialogRef = this.dialog.open(PostFormComponent, {
       width: '450px',
       height: '350px',
     });
