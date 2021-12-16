@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 
@@ -9,7 +10,13 @@ import { FormModule } from './shared/components/create-post-form/form.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, HeaderModule, BlogModule, FormModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    HeaderModule,
+    BlogModule,
+    FormModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

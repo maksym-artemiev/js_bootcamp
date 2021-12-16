@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { HeaderComponent } from './header.component';
 
 import { MatDialogModule } from '@angular/material/dialog';
@@ -11,7 +10,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 @NgModule({
   declarations: [HeaderComponent],
   imports: [
-    BrowserModule,
     MatDialogModule,
     BrowserAnimationsModule,
     MatIconModule,
