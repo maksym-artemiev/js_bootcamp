@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 import { PostFormComponent } from './create-post-form.component';
 
@@ -12,7 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [PostFormComponent],
   imports: [
-    BrowserModule,
+    CommonModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatFormFieldModule,
