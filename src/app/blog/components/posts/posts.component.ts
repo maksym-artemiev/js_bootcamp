@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { PostService } from '../../services/post.service';
 import { Post } from './post.interface';
 
@@ -9,9 +10,9 @@ import { Post } from './post.interface';
 })
 
 export class PostsComponent implements OnInit {
-  posts: Post[] = [];
-
-  today: number = Date.now();
+  posts!: Observable<Post[]>;
+  
+  // today: Date = new Date();
 
   constructor(private postService: PostService) {}
 
@@ -20,8 +21,6 @@ export class PostsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.postService
-      .getPostData()
-      .subscribe((posts) => this.posts = posts);
+    this.posts = this.postService.getDataFromServer();
   }
 }

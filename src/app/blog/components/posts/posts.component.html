@@ -1,4 +1,4 @@
-<div *ngFor="let post of posts" class="post">
+<div *ngFor="let post of (posts | async)" class="post">
   <hr />
   <div class="post-info">
     <div class="post-info__author">
@@ -10,7 +10,7 @@
       <div class="post-info__author__info">
         <p class="post-info__author__info-name">{{ post.name }}</p>
         <p class="post-info__author__info-date">
-          {{ today | date: "longDate" }}
+          {{ post?.today | date: "longDate" }}
         </p>
       </div>
     </div>
@@ -20,7 +20,7 @@
       (click)="onClick(post)"
     >
       <mat-icon class="post-info__like-icon">thumb_up</mat-icon>
-      <p class="post-info__like-number">{{ post?.like }}</p>
+      <p class="post-info__like-number">{{ post?.like.length }}</p>
     </div>
   </div>
   <div class="post-about">
