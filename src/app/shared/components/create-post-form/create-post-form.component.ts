@@ -44,7 +44,7 @@ export class PostFormComponent {
   }
 
   onSubmit(e: Event) {
-    this.postService.updatePostData({...this.form.value, like: 0});
+    this.postService.updatePostData({...this.form.value, today: new Date() });
     this.dialogRef.close();
   }
 }
