@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { HeaderModule } from './shared/components/header/header.module';
 import { BlogModule } from './blog/blog.module';
 import { FormModule } from './shared/components/create-post-form/form.module';
+import { UserModule } from './user/user.module';
+
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +19,8 @@ import { FormModule } from './shared/components/create-post-form/form.module';
     HeaderModule,
     BlogModule,
     FormModule,
+    UserModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PostFormComponent } from '../create-post-form/create-post-form.component';
+import {
+  Router,
+  Event,
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,17 +15,28 @@ import { PostFormComponent } from '../create-post-form/create-post-form.componen
   styleUrls: ['./header.component.less'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(public dialog: MatDialog) {}
+  showLoading = false;
+  constructor(public dialog: MatDialog, private router: Router) {
+    this.router.events.subscribe((routerEvent: Event) => {
+      if (routerEvent instanceof NavigationStart) {
+        this.showLoading = true;
+      }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(PostFormComponent, {
-      width: '450px',
-      height: '350px',
+      if (
+        routerEvent instanceof NavigationEnd ||
+        routerEvent instanceof NavigationError ||
+        routerEvent instanceof NavigationCancel
+      ) {
+        this.showLoading = false;
+      }
     });
+  }
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('Form closed.');
-    });
+  public onClick(route: string) {
+    if (this.router.url !== '/' + route) this.showLoading = true;
+    setTimeout(() => {
+      this.router.navigate([route]);
+    }, 1000);
   }
 
   ngOnInit(): void {}

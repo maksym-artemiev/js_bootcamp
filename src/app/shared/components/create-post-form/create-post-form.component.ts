@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
 import { PostService } from '../../../blog/services/post.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -19,7 +19,7 @@ export class PostFormComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    public dialogRef: MatDialogRef<PostFormComponent>,
+    private router: Router,
     private postService: PostService
   ) {
     this.form = this.formBuilder.group({
@@ -43,8 +43,11 @@ export class PostFormComponent {
     return er ? this.errors[er] : '';
   }
 
+  public close() {
+    void this.router.navigate(['home']);
+  }
   onSubmit(e: Event) {
-    this.postService.updatePostData({...this.form.value, today: new Date() });
-    this.dialogRef.close();
+    this.postService.updatePostData({ ...this.form.value, today: new Date() });
+    void this.router.navigate(['home']);
   }
 }
