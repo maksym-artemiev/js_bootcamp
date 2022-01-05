@@ -3,11 +3,11 @@
     <h2>My blog</h2>
 
     <nav>
-      <a (click)="onClick('home')">Home</a>
-      <a (click)="onClick('new-article')"
+      <a routerLink='home' href="javascript:void(0)">Home</a>
+      <a routerLink='new-article' href="javascript:void(0)"
         ><mat-icon class="icon-create">create</mat-icon>New Article</a
       >
-      <a (click)="onClick('user')">User Name</a>
+      <a routerLink='user' href="javascript:void(0)">User Name</a>
     </nav>
   </mat-toolbar>
 </div>

@@ -44,10 +44,10 @@ export class PostFormComponent {
   }
 
   public close() {
-    void this.router.navigate(['home']);
+    this.router.navigate(['home']);
   }
   onSubmit(e: Event) {
     this.postService.updatePostData({ ...this.form.value, today: new Date() });
-    void this.router.navigate(['home']);
+    this.router.navigate(['home']);
   }
 }

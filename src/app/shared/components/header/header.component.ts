@@ -32,12 +32,5 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  public onClick(route: string) {
-    if (this.router.url !== '/' + route) this.showLoading = true;
-    setTimeout(() => {
-      this.router.navigate([route]);
-    }, 1000);
-  }
-
   ngOnInit(): void {}
 }
