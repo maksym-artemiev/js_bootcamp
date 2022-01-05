@@ -1,12 +1,18 @@
-@import '/src/styles/_variables';
+@import "/src/styles/_variables";
 
 .contacts-form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 70%;
+  margin: 40px auto 0;
   &__item {
     &--submit {
       background: @button-submit;
+    }
+    &--close {
+      display: block;
+      margin: 10px auto 0;
     }
   }
 }

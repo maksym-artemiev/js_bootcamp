@@ -3,11 +3,17 @@
     <h2>My blog</h2>
 
     <nav>
-      <a href="#">Home</a>
-      <a (click)="openDialog()"
+      <a routerLink='home' href="javascript:void(0)">Home</a>
+      <a routerLink='new-article' href="javascript:void(0)"
         ><mat-icon class="icon-create">create</mat-icon>New Article</a
       >
-      <a href="#">User Name</a>
+      <a routerLink='user' href="javascript:void(0)">User Name</a>
     </nav>
   </mat-toolbar>
 </div>
+<mat-progress-bar
+  *ngIf="showLoading"
+  color="warn"
+  mode="query"
+  class="loading"
+></mat-progress-bar>
