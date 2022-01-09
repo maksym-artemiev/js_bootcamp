@@ -2,6 +2,8 @@ export interface Post {
   name: string;
   title: string;
   about: string;
-  today: Date;
+  createdAt: Date;
   like?: any;
+  comments?: string;
+  tags?: string;
 }

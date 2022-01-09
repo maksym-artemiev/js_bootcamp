@@ -10,7 +10,7 @@
       <div class="post-info__author__info">
         <p class="post-info__author__info-name">{{ post.name }}</p>
         <p class="post-info__author__info-date">
-          {{ post?.today | date: "longDate" }}
+          {{ post?.createdAt | date: "longDate" }}
         </p>
       </div>
     </div>

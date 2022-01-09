@@ -1,17 +1,29 @@
 const express = require("express");
 const router = express.Router();
 
-const { addComment, removeComment, updateComment } = require("./controller");
+const {
+  addComment,
+  getOneComment,
+  deleteComment,
+  updateComment,
+} = require("./controller");
 
 router
   .post("/", async (req, res) => {
-    res.send(await addComment(req.body));
+    const result = await addComment(req.body);
+    res.send(result);
   })
-  .put("/:id", async (req, res) => {
-    res.send(await updateComment(req.params.id, req.body));
+  .get("/:id", async (req, res) => {
+    const result = await getOneComment(req.params.id);
+    res.send(result);
+  })
+  .patch("/:id", async (req, res) => {
+    const result = await updateComment(req.params.id, req.body);
+    res.send(result);
   })
   .delete("/:id", async (req, res) => {
-    res.send(await removeComment(req.params.id));
+    const result = await deleteComment(req.params.id);
+    res.send(result);
   });
 
 module.exports = router;

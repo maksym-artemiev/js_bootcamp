@@ -5,6 +5,7 @@ const likeSchema = Schema({
   tagName: {
     type: String,
     required: true,
+    unique: true,
   },
   postId: [
     {

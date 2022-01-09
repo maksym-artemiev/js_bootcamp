@@ -2,14 +2,15 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const commentSchema = Schema({
-  postId: { type: Schema.Types.ObjectId, ref: "Post" },
+  postId: [{ type: Schema.Types.ObjectId, ref: "Post", required: true }],
   author: {
-    type: mongoose.Types.ObjectId,
+    type: Schema.Types.ObjectId,
+    ref: "User",
     required: true,
   },
-  textmessage: {
-    required: true,
+  textMessage: {
     type: String,
+    required: true,
   },
 });
 

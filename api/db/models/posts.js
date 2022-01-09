@@ -14,7 +14,7 @@ const postSchema = Schema({
     type: String,
     required: true,
   },
-  today: {
+  createdAt: {
     type: Date,
     required: true,
   },

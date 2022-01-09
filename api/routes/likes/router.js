@@ -5,11 +5,12 @@ const { addLike, removeLike } = require("./controller");
 
 router
   .post("/", async (req, res) => {
-    res.send(await addLike(req.body));
+    const result = await addLike(req.body);
+    res.send(result);
   })
   .delete("/:id", async (req, res) => {
-    console.log(req.params);
-    res.send(await removeLike(req.params.id));
+    const result = await removeLike(req.params.id);
+    res.send(result);
   });
 
 module.exports = router;

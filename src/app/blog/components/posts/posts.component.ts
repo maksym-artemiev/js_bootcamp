@@ -11,8 +11,6 @@ import { Post } from './post.interface';
 
 export class PostsComponent implements OnInit {
   posts!: Observable<Post[]>;
-  
-  // today: Date = new Date();
 
   constructor(private postService: PostService) {}
 
