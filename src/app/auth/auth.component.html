@@ -1,0 +1,91 @@
+<form class="auth-form" [formGroup]="form" (submit)="onFormSubmit($event)">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>First name</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="firstName"
+      placeholder="Ex. Maksym"
+      required
+    />
+    <mat-error *ngIf="isFormInvalid('firstName')">
+      Last Name is <strong>required, minimum</strong> 2 symbols,
+      <strong>maximum</strong> 12 symbols
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Last Name</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="lastName"
+      placeholder="Ex. Artemiev"
+      required
+    />
+    <mat-error *ngIf="isFormInvalid('lastName')">
+      Last Name is <strong>required, minimum</strong> 2 symbols,
+      <strong>maximum</strong> 12 symbols
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Login</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="login"
+      placeholder="Ex. max_art"
+      required
+    />
+    <mat-error *ngIf="isFormInvalid('login')">
+      Login is <strong>required, minimum</strong> 4 symbols
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Email</mat-label>
+    <input
+      type="email"
+      matInput
+      formControlName="email"
+      placeholder="Ex. patrick@gmail.com"
+      required
+    />
+    <mat-error *ngIf="isFormInvalid('email')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input
+      type="password"
+      matInput
+      formControlName="password"
+      placeholder="Ex. Pass_woRd"
+      required
+    />
+    <mat-error *ngIf="isFormInvalid('password')">
+      Password is <strong>required and minimum</strong> 5 symbols
+    </mat-error>
+  </mat-form-field>
+
+  <button
+    mat-stroked-button
+    color="primary"
+    type="submit"
+    [disabled]="form?.untouched || !form?.valid"
+  >
+    {{ isAuthorized ? "Login" : "Register" }}
+  </button>
+  <hr />
+  <button
+    mat-stroked-button
+    color="accent"
+    (click)="onSwitchMode()"
+    type="button"
+  >
+    Switch to {{ isAuthorized ? "Register" : "Login" }}
+  </button>
+</form>

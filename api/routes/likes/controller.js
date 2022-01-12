@@ -1,37 +1,35 @@
-const mongoose = require("mongoose");
-const { Post } = require("../../db/models/posts");
-const { Like } = require("../../db/models/likes");
+const { likes } = require("../../services/index");
 
-async function addLike(data) {
+async function addLike(req, res) {
+  const { postId, author, createdAt } = req.body;
   try {
-    const like = new Like({
-      author: new mongoose.Types.ObjectId(data.author),
-      postId: new mongoose.Types.ObjectId(data.postId),
-    });
-    like.save();
-    await Post.updateOne({ _id: like.postId }, { $push: { like: like._id } });
-    return {
-      status: 200,
+    const options = {
+      postId,
+      author,
+      createdAt,
     };
+    const result = await likes.addLike(options);
+    res.status(200).send(result.data);
   } catch (error) {
-    console.log("Something gone wrong.", error);
+    res.status(500).send({
+      err: error || "Something gone wrong.",
+    });
   }
 }
 
-async function removeLike(id) {
+async function deleteLike(req, res) {
+  const { id } = req.params;
   try {
-    const like = await Like.findById({ _id: new mongoose.Types.ObjectId(id) });
-    await Post.updateOne({ _id: like.postId }, { $pull: { like: like._id } });
-    await Like.deleteOne({ _id: like._id });
-    return {
-      status: 200,
-    };
+    await likes.deleteLike({ id });
+    res.status(200).send();
   } catch (error) {
-    console.log("Something gone wrong.", error);
+    res.status(500).send({
+      err: error || "Something gone wrong.",
+    });
   }
 }
 
 module.exports = {
   addLike,
-  removeLike,
+  deleteLike,
 };

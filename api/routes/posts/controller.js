@@ -1,57 +1,85 @@
-const { Post } = require("../../db/models/posts");
-const { Comment } = require("../../db/models/comments");
-const { Like } = require("../../db/models/likes");
+const { posts } = require("../../services/index");
 
-async function getPosts() {
+async function getPosts(req, res) {
+  const { tag } = req.query;
   try {
-    const result = await Post.find({});
-    return result;
+    const options = { tag };
+    const result = await posts.getPosts(options);
+    res.status(200).send(result.data);
   } catch (error) {
-    console.log("Can`t find a list of posts:", error);
+    res.status(500).send({
+      err: error || "Can`t find a list of posts.",
+    });
   }
 }
 
-async function getPost(id) {
+async function getPost(req, res) {
+  const { id } = req.params;
   try {
-    const result = await Post.findOne(id);
-    return result;
+    const options = { id };
+    const result = await posts.getPost(options);
+    res.status(200).send(result.data);
   } catch (error) {
-    console.log("Can`t find a post:", error);
+    res.status(500).send({
+      err: error || "Can`t find a post.",
+    });
   }
 }
 
-async function addPost(post) {
+async function addPost(req, res) {
+  const author = req.ctx.requester._id;
+  const { title, about, createdAt, tags } = req.body;
   try {
-    await Post.create(Object.assign(post));
-    return {
-      status: 200,
+    const options = {
+      author,
+      title,
+      about,
+      createdAt,
+      tags,
     };
+    const result = await posts.addPost(options);
+    res.status(200).send(result.data);
   } catch (error) {
-    console.log("Can`t add a post:", error);
+    res.status(500).send({
+      err: error || "Can`t add a post.",
+    });
   }
 }
 
-async function updatePost(id, data) {
+async function updatePost(req, res) {
+  const { id } = req.params;
+  const { author, title, about, createdAt, tags } = req.body;
   try {
-    await Post.findOneAndUpdate(id, data);
-    return {
-      status: 200,
+    const options = {
+      _id: id,
+      options: {
+        author,
+        title,
+        about,
+        createdAt,
+        tags,
+      },
     };
+
+    await posts.updatePost(options);
+    res.status(200).send();
   } catch (error) {
-    console.log("Can`t update a post:", error);
+    res.status(500).send({
+      err: error || "Can`t update a post.",
+    });
   }
 }
 
-async function deletePost(id) {
+async function deletePost(req, res) {
+  const { id } = req.params;
   try {
-    await Post.deleteOne({ _id: id });
-    await Like.find({ postId: id }).deleteOne({});
-    await Comment.find({ postId: id }).deleteOne({});
-    return {
-      status: 200,
-    };
+    const options = { id };
+    const result = await posts.deletePost(options);
+    res.status(200).send(result.data);
   } catch (error) {
-    console.log("Can`t delete a post:", error);
+    res.status(500).send({
+      err: error || "Can`t find/delete a post.",
+    });
   }
 }
 

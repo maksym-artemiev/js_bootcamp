@@ -1,69 +1,64 @@
-const mongoose = require("mongoose");
-const { Post } = require("../../db/models/posts");
-const { Comment } = require("../../db/models/comments");
+const { comments } = require("../../services/index");
 
-async function getAllComments() {
+async function addComment(req, res) {
+  const { postId, author, textMessage, createdAt } = req.body;
   try {
-    return Comment.find({});
+    const options = {
+      postId,
+      author,
+      textMessage,
+      createdAt,
+    };
+    const result = comments.addComment(options);
+    res.status(200).send(result.data);
   } catch (error) {
-    console.log(error);
-  }
-}
-
-async function addComment(data) {
-  try {
-    const comment = new Comment({
-      author: new mongoose.Types.ObjectId(data.author),
-      postId: new mongoose.Types.ObjectId(data.postId),
-      textMessage: data.textMessage,
+    res.status(500).send({
+      err: error || "Cannot add a comment.",
     });
-    comment.save();
-    await Post.updateOne(
-      { _id: comment.postId },
-      { $push: { comments: comment._id } }
-    );
-    return {
-      status: 200,
-    };
-  } catch (error) {
-    console.log("Operation is not possible, look at error message:", error);
   }
 }
 
-async function getOneComment(id) {
+async function getOneComment(req, res) {
+  const { id } = req.params;
   try {
-    return Comment.find({ id });
-  } catch (error) {
-    console.log("Cannot find selected comment", error);
-  }
-}
+    const result = await comments.findOne(id);
 
-async function updateComment(id, data) {
-  try {
-    await Comment.findOneAndUpdate(id, data);
-    return {
-      status: 200,
-    };
+    res.status(200).send(result.data);
   } catch (error) {
-    console.log("Cannot find selected comment", error);
-  }
-}
-
-async function deleteComment(id) {
-  try {
-    const comment = await Comment.findById({
-      _id: new mongoose.Types.ObjectId(id),
+    res.status(500).send({
+      err: error || "Cannot find selected comment.",
     });
-    await Post.updateOne(
-      { _id: comment.postId },
-      { $pull: { comments: comment._id } }
-    );
-    await Comment.deleteOne({ _id: comment._id });
-    return {
-      status: 400,
+  }
+}
+
+async function updateComment(req, res) {
+  const { id } = req.params;
+  const { postId, author, textMessage, createdAt } = req.body;
+  try {
+    const options = {
+      postId,
+      author,
+      textMessage,
+      createdAt,
     };
+    const result = await comments.updateComment({ id, options });
+    res.status(200).send(result.data);
   } catch (error) {
-    console.log("Cannot find selected comment", error);
+    res.status(500).send({
+      err: error || "Cannot find selected comment.",
+    });
+  }
+}
+
+async function deleteComment(req, res) {
+  const { id } = req.params;
+  try {
+    comments.deleteComment({ id });
+    res.status(200).send();
+  } catch (error) {
+    res.status(500).send({
+      err: error || "Cannot find selected comment.",
+    });
   }
 }
 

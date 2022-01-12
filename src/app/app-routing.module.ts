@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MyBlogComponent } from '../app/blog/components/my-blog/my-blog.component';
 import { PostFormComponent } from '../app/shared/components/create-post-form/create-post-form.component';
+import { AuthComponent } from './auth/auth.component';
 import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
@@ -18,9 +19,14 @@ const routes: Routes = [
     component: UserComponent,
   },
   {
+    path: 'auth',
+    component: AuthComponent,
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },
+  
 ];
 
 @NgModule({

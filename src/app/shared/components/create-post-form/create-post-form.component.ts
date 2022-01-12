@@ -23,7 +23,7 @@ export class PostFormComponent {
     private postService: PostService
   ) {
     this.form = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.pattern(this.userPatt)]],
+      author: ['', [Validators.required, Validators.pattern(this.userPatt)]],
       title: ['', [Validators.required, Validators.minLength(10)]],
       about: ['', [Validators.required, Validators.minLength(10)]],
     });
