@@ -1,69 +1,52 @@
-const mongoose = require("mongoose");
-const session = mongoose.startSession();
-const { User } = require("../../db/models/users");
-const { Comment } = require("../../db/models/comments");
+const { users } = require("../../services/index");
 
-async function getAllUsers() {
+async function getUser(req, res) {
+  const { id } = req.params;
   try {
-    return User.find({});
+    const result = await users.getUser({ id });
+    res.status(200).send(result.data);
   } catch (error) {
-    console.log("Some problem with search:", error);
-  }
-}
-
-async function getUser(id) {
-  try {
-    const result = await User.findOne(id);
-    return result;
-  } catch (error) {
-    console.log("Can`t find a user:", error);
-  }
-}
-
-async function addUser(dataUser) {
-  try {
-    await User.create(dataUser);
-    return {
-      status: 200,
-    };
-  } catch (error) {
-    console.log("Can`t create user:", error);
-  }
-}
-
-async function updateUser(id, dataUser) {
-  try {
-    await User.findOneAndUpdate(id, dataUser);
-    return {
-      status: 200,
-    };
-  } catch (error) {
-    console.log("Can`t update user-info:", error);
-  }
-}
-
-async function deleteUser(id) {
-  try {
-    await session.withTransaction(async () => {
-      await User.deleteOne({ _id: id });
-      await Comment.find({ author: id }).deleteMany({});
+    res.status(500).send({
+      err: error || "Can`t find user.",
     });
-    await session.abortTransaction();
-    return {
-      status: 200,
+  }
+}
+
+async function addUser(req, res) {
+  const { firstName, lastName, userName, login, email, password } = req.body;
+  try {
+    const options = {
+      firstName,
+      lastName,
+      userName,
+      login,
+      email,
+      password,
     };
+    const result = await users.addUser(options);
+    res.status(200).send(result.data);
   } catch (error) {
-    console.log(
-      "Can`t find and delete user with selected id, look at error:",
-      error
-    );
+    res.status(500).send({
+      err: error || "Can`t create user.",
+    });
+  }
+}
+
+async function deleteUser(req, res) {
+  const { id } = req.params;
+  try {
+    const result = await users.deleteUser({ id });
+    res.status(200).send(result.data);
+  } catch (error) {
+    res.status(500).send({
+      err:
+        error || "Can`t find and delete user with selected id, look at error.",
+    });
   }
 }
 
 module.exports = {
-  getAllUsers,
   getUser,
   addUser,
-  updateUser,
   deleteUser,
 };
