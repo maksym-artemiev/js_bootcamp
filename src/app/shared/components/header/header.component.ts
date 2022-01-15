@@ -15,6 +15,7 @@ import {
   styleUrls: ['./header.component.less'],
 })
 export class HeaderComponent implements OnInit {
+  knownUser! : string | null;
   showLoading = false;
   constructor(public dialog: MatDialog, private router: Router) {
     this.router.events.subscribe((routerEvent: Event) => {
@@ -32,5 +33,12 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  public signOut() {
+    localStorage.removeItem('id_token');
+    this.knownUser = localStorage.getItem('id_token');
+  }
+
+  ngOnInit(): void {
+    this.knownUser = localStorage.getItem('id_token');
+  }
 }

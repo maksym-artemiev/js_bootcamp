@@ -12,7 +12,7 @@ async function getPosts(options) {
     });
     params._id = { $in: sortedPostsByTags.postId };
   }
-  const result = await Post.find(params);
+  const result = await Post.find(params).populate('author', 'fullName');
   return result;
 }
 
@@ -46,7 +46,7 @@ async function addPost(options) {
         { $push: { tags: result._id } }
       );
     });
-    const result = await Post.find({ _id: post._id });
+    const result = await Post.find({ _id: post._id }).populate('author', 'fullName');
     return result;
   } catch (error) {
     throw error;

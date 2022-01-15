@@ -4,31 +4,25 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { RegistrationService } from '../../services/registration.service';
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.less'],
+  selector: 'app-registration',
+  templateUrl: './registration.component.html',
+  styleUrls: ['./registration.component.less']
 })
-export class AuthComponent {
+export class RegistrationComponent {
   form: FormGroup;
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private registService: RegistrationService, private router: Router) {
     this.form = this.formBuilder.group({
-      firstName: [
+      fullName: [
         '',
         [
           Validators.required,
           Validators.minLength(2),
-          Validators.maxLength(12),
-        ],
-      ],
-      lastName: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(2),
-          Validators.maxLength(12),
-        ],
+          Validators.maxLength(20)
+        ]
       ],
       login: ['', [Validators.required, Validators.minLength(4)]],
       email: ['', [Validators.required, Validators.email]],
@@ -47,7 +41,8 @@ export class AuthComponent {
   }
 
   onFormSubmit(e: Event) {
-    console.log(this.form.value);
+    this.registService.registration(this.form.value);
     this.form.reset();
+    this.router.navigate(['login']);
   }
 }

@@ -13,12 +13,10 @@ async function getUser(req, res) {
 }
 
 async function addUser(req, res) {
-  const { firstName, lastName, userName, login, email, password } = req.body;
+  const { fullName, login, email, password } = req.body;
   try {
     const options = {
-      firstName,
-      lastName,
-      userName,
+      fullName,
       login,
       email,
       password,
@@ -29,6 +27,19 @@ async function addUser(req, res) {
     res.status(500).send({
       err: error || "Can`t create user.",
     });
+  }
+}
+
+async function login(req, res) {
+  const {login, password} = req.body;
+  try {
+    const options = {login, password};
+    const result = await users.login(options);
+    res.status(200).send(result);
+  } catch (error) {
+    res.status(500).send({
+      err: error || "Login error."
+    })
   }
 }
 
@@ -48,5 +59,6 @@ async function deleteUser(req, res) {
 module.exports = {
   getUser,
   addUser,
+  login,
   deleteUser,
 };

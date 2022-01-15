@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class PostFormComponent {
   form: FormGroup;
-  userPatt = '^[a-zA-Zs]{3,20}$';
+  userPatt = '^[a-zA-Zs\\s]{3,20}$';
   errors: any = {
     required: 'You must enter a value',
     minlength: 'Write your title/description* Min. 10 symbols',

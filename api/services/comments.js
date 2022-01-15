@@ -6,7 +6,7 @@ const updateComment = (id, data) => commentsDao.updateOne(id, data);
 
 const addComment = (options) => {
   try {
-    const newComment = await commentsDao.createNew(options);
+    const newComment = commentsDao.createNew(options);
     return {
       data: newComment,
     };
@@ -17,7 +17,7 @@ const addComment = (options) => {
 
 const deleteComment = (id) => {
   try {
-    await commentsDao.deleteComment(id);
+    commentsDao.deleteComment(id);
   } catch (error) {
     throw error;
   }

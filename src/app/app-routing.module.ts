@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MyBlogComponent } from '../app/blog/components/my-blog/my-blog.component';
 import { PostFormComponent } from '../app/shared/components/create-post-form/create-post-form.component';
-import { AuthComponent } from './auth/auth.component';
-import { UserComponent } from './user/user.component';
+import { LoginComponent } from './auth/components/login/login.component';
+import { RegistrationComponent } from './auth/components/registration/registration.component';
+
 
 const routes: Routes = [
   {
@@ -15,12 +16,12 @@ const routes: Routes = [
     component: PostFormComponent,
   },
   {
-    path: 'user',
-    component: UserComponent,
+    path: 'login',
+    component: LoginComponent,
   },
   {
-    path: 'auth',
-    component: AuthComponent,
+    path: 'registration',
+    component: RegistrationComponent,
   },
   {
     path: '**',

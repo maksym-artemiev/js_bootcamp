@@ -17,7 +17,8 @@ async function addUser(options) {
   try {
     const user = await usersDao.addUser(options);
     return {
-      data: "Added succesfully.",
+      status: 200,
+      statusText: "Added succesfully.",
     };
   } catch (error) {
     throw error;

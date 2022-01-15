@@ -1,0 +1,49 @@
+<form class="auth-login-form" [formGroup]="form" (submit)="onFormSubmit($event)">
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Login/username</mat-label>
+      <input
+        type="text"
+        matInput
+        formControlName="login"
+        placeholder="Ex. max_art"
+        required
+      />
+      <mat-error *ngIf="isFormInvalid('login')">
+        Login is <strong>required, minimum</strong> 4 symbols
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input
+        type="password"
+        matInput
+        formControlName="password"
+        placeholder="Ex. Pass_woRd"
+        required
+      />
+      <mat-error *ngIf="isFormInvalid('password')">
+        Password is <strong>required and minimum</strong> 5 symbols
+      </mat-error>
+    </mat-form-field>
+  
+    <button
+      mat-stroked-button
+      color="primary"
+      type="submit"
+      [disabled]="form?.untouched || !form?.valid"
+    >
+      Login
+    </button>
+    <hr />
+    <button
+      mat-stroked-button
+      color="accent"
+      (click)="onSwitchMode()"
+      type="button"
+    >
+      Return to registration
+    </button>
+  </form>
+  

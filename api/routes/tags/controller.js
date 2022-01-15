@@ -38,7 +38,7 @@ async function createTag(req, res) {
   }
 }
 
-async function deleteTag(id) {
+async function deleteTag(options) {
   const { id } = req.params;
   try {
     const options = { id };
