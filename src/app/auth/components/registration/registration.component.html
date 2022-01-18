@@ -62,15 +62,15 @@
     type="submit"
     [disabled]="form?.untouched || !form?.valid"
   >
-    {{ isAuthorized ? "Login" : "Register" }}
+    Register
   </button>
   <hr />
   <button
     mat-stroked-button
     color="accent"
-    (click)="onSwitchMode()"
+    (click)="onLoginBack()"
     type="button"
   >
-    Switch to {{ isAuthorized ? "Register" : "Login" }}
+    Return to Login
   </button>
 </form>

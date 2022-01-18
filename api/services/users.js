@@ -38,6 +38,7 @@ async function login({ login, password }) {
       const token = jsonwebtoken.sign({ login, _id: user._id }, "nodemon");
       return {
         token: token,
+        username: user.fullName,
       };
     } else {
       return {
@@ -66,3 +67,4 @@ module.exports = {
   login,
   deleteUser,
 };
+

@@ -4,12 +4,14 @@ import { MyBlogComponent } from '../app/blog/components/my-blog/my-blog.componen
 import { PostFormComponent } from '../app/shared/components/create-post-form/create-post-form.component';
 import { LoginComponent } from './auth/components/login/login.component';
 import { RegistrationComponent } from './auth/components/registration/registration.component';
+import { UserComponent } from './auth/components/user/user.component';
 
 
 const routes: Routes = [
   {
     path: 'home',
     component: MyBlogComponent,
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'new-article',
@@ -22,6 +24,10 @@ const routes: Routes = [
   {
     path: 'registration',
     component: RegistrationComponent,
+  },
+  {
+    path: 'user',
+    component: UserComponent,
   },
   {
     path: '**',

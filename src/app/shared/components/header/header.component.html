@@ -3,14 +3,45 @@
     <h2>My blog</h2>
 
     <nav>
-      <a routerLink='home' href="javascript:void(0)">Home</a>
-      <a routerLink='new-article' href="javascript:void(0)"
+      <a routerLink="home" href="javascript:void(0)">Home</a>
+      <a
+        routerLink="new-article"
+        href="javascript:void(0)"
+        *ngIf="authorized | async"
         ><mat-icon class="icon-create">create</mat-icon>New Article</a
       >
-      <a routerLink='registration' href="javascript:void(0)">Registration</a>
-      <a 
-      routerLink='login' 
-      href="javascript:void(0)">Login</a> 
+      <a
+        routerLink="registration"
+        href="javascript:void(0)"
+        *ngIf="!(authorized | async)"
+        >Registration</a
+      >
+      <a
+        routerLink="login"
+        href="javascript:void(0)"
+        *ngIf="!(authorized | async)"
+        ><mat-icon
+          class="icon-in"
+          svgIcon="log-in"
+          aria-hidden="false"
+          aria-label="Sign In"
+        ></mat-icon
+        >Login</a
+      >
+      <a
+        routerLink="user"
+        href="javascript:void(0)"
+        *ngIf="authorized | async"
+        >{{ (authorized | async).username }}</a
+      >
+      <a (click)="signOut()" *ngIf="authorized | async"
+        >Sign Out<mat-icon
+          class="icon-out"
+          svgIcon="log-out"
+          aria-hidden="false"
+          aria-label="Sign Out"
+        ></mat-icon
+      ></a>
     </nav>
   </mat-toolbar>
 </div>

@@ -36,8 +36,8 @@ export class RegistrationComponent {
 
   isAuthorized = true;
 
-  onSwitchMode() {
-    this.isAuthorized = !this.isAuthorized;
+  onLoginBack() {
+    this.router.navigate(['login']);
   }
 
   onFormSubmit(e: Event) {

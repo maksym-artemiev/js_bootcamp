@@ -25,16 +25,15 @@ export class LoginComponent implements OnInit {
     return this.form.get(formControl)?.status == 'INVALID';
   }
 
-  isAuthorized = true;
-
-  onSwitchMode() {
-    this.isAuthorized = !this.isAuthorized;
-  }
 
   onFormSubmit(e: Event) {
     this.loginService.login(this.form.value);
-    this.form.reset();
+    // this.form.reset();
     this.router.navigate(['home']);
+  }
+
+  onRegistrationBack() {
+    this.router.navigate(['registration']);
   }
 
   ngOnInit(): void {
