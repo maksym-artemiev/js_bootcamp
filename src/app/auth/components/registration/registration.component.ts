@@ -1,28 +1,35 @@
-import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { Component, Injectable, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegistrationService } from '../../services/registration.service';
 
+@Injectable({
+  providedIn: 'root',
+})
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.less']
+  styleUrls: ['./registration.component.less'],
 })
-export class RegistrationComponent {
-  form: FormGroup;
-  constructor(private formBuilder: FormBuilder, private registService: RegistrationService, private router: Router) {
+export class RegistrationComponent implements OnInit {
+  form!: FormGroup;
+  constructor(
+    private formBuilder: FormBuilder,
+    private registService: RegistrationService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
+
+  ngOnInit(): void {
     this.form = this.formBuilder.group({
       fullName: [
         '',
         [
           Validators.required,
           Validators.minLength(2),
-          Validators.maxLength(20)
-        ]
+          Validators.maxLength(20),
+        ],
       ],
       login: ['', [Validators.required, Validators.minLength(4)]],
       email: ['', [Validators.required, Validators.email]],
@@ -36,11 +43,15 @@ export class RegistrationComponent {
 
   isAuthorized = true;
 
-  onLoginBack() {
+  onLoginBack(): void {
     this.router.navigate(['login']);
   }
 
-  onFormSubmit(e: Event) {
+  openSnackBar(): void {
+    this.snackBar.open('You successfuly registered in system', 'Ok)', {duration: 5000});
+  }
+
+  onFormSubmit(e: Event): void {
     this.registService.registration(this.form.value);
     this.form.reset();
     this.router.navigate(['login']);

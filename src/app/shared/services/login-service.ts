@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LogService {
-  authorized: BehaviorSubject<any> = new BehaviorSubject({
-    token: localStorage.getItem('id_token'),
-    username: localStorage.getItem('user_name'),
-  });
+  authorized: BehaviorSubject<string|null> = new BehaviorSubject(localStorage.getItem('user_name'));
 
   public setInfo(token: string, username: string) {
     localStorage.setItem('id_token', token);
     localStorage.setItem('user_name', username);
-    this.authorized.next({ token, username });
+    this.authorized.next(username);
+  }
+
+  isAuthenticated(): Observable<string|null> {
+    return this.authorized.asObservable();
   }
 
   public cleanInfo() {

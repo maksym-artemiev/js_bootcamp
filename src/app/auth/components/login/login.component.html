@@ -33,6 +33,7 @@
       color="primary"
       type="submit"
       [disabled]="form?.untouched || !form?.valid"
+      (click) = "openSnackBar()"
     >
       Login
     </button>

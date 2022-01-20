@@ -6,9 +6,10 @@ import { PopularTagsComponent } from './components/popular-tags/popular-tags.com
 
 import { PostsComponent } from './components/posts/posts.component';
 import { MatIconModule } from '@angular/material/icon';
+import { PostPageComponent } from './components/post-page/post-page.component';
 
 @NgModule({
-  declarations: [MyBlogComponent, PopularTagsComponent, PostsComponent],
+  declarations: [MyBlogComponent, PopularTagsComponent, PostsComponent, PostPageComponent],
   imports: [BrowserModule, MatIconModule],
   exports: [MyBlogComponent],
 })

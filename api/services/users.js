@@ -25,6 +25,18 @@ async function addUser(options) {
   }
 }
 
+async function updateUser(options) {
+  try {
+    const user = await usersDao.update(options);
+    return {
+      status: 200,
+      statusText: "Added succesfully.",
+    };
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function login({ login, password }) {
   try {
     const user = await usersDao.getUserByName({ login });
@@ -66,5 +78,6 @@ module.exports = {
   addUser,
   login,
   deleteUser,
+  updateUser,
 };
 

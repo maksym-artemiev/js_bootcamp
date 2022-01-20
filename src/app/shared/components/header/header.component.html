@@ -32,7 +32,7 @@
         routerLink="user"
         href="javascript:void(0)"
         *ngIf="authorized | async"
-        >{{ (authorized | async).username }}</a
+        >{{ authorized | async }}</a
       >
       <a (click)="signOut()" *ngIf="authorized | async"
         >Sign Out<mat-icon

@@ -16,11 +16,9 @@ async function getPosts(options) {
   return result;
 }
 
-async function getPost(options) {
-  const { id } = options;
+async function getPost(_id) {
   try {
-    const post = await Post.findOne(id);
-    return post;
+    return Post.findOne({_id: _id}).populate('author', 'fullName');
   } catch (error) {
     throw error;
   }

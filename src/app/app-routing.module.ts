@@ -5,6 +5,7 @@ import { PostFormComponent } from '../app/shared/components/create-post-form/cre
 import { LoginComponent } from './auth/components/login/login.component';
 import { RegistrationComponent } from './auth/components/registration/registration.component';
 import { UserComponent } from './auth/components/user/user.component';
+import { PostPageComponent } from './blog/components/post-page/post-page.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path: 'user',
     component: UserComponent,
+  },
+  {
+    path: 'posts/:id',
+    component: PostPageComponent,
   },
   {
     path: '**',

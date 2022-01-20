@@ -30,12 +30,12 @@
   <div class="contacts-form__item">
     <mat-form-field appearance="fill">
       <mat-label>Your news for publishing</mat-label>
-      <input
+      <textarea
         matInput
         placeholder="Ex.: I write about..."
         formControlName="about"
         required
-      />
+      ></textarea>
       <mat-error *ngIf="isFormInvalid('about')">{{
         getErrorMessage("about")
       }}</mat-error>

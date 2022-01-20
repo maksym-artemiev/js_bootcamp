@@ -12,11 +12,9 @@ async function getPosts(options) {
 }
 
 async function getPost(options) {
+
   try {
-    const post = await postsDao.getPost(options);
-    return {
-      data: post,
-    };
+    return postsDao.getPost(options);
   } catch (error) {
     throw error;
   }

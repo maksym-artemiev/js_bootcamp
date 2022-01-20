@@ -1,9 +1,9 @@
 const { users } = require("../../services/index");
 
 async function getUser(req, res) {
-  const { id } = req.params;
+  const { _id } = req.ctx.requester;
   try {
-    const result = await users.getUser({ id });
+    const result = await users.getUser({ _id });
     res.status(200).send(result.data);
   } catch (error) {
     res.status(500).send({
@@ -26,6 +26,24 @@ async function addUser(req, res) {
   } catch (error) {
     res.status(500).send({
       err: error || "Can`t create user.",
+    });
+  }
+}
+
+async function updateUser(req, res) {
+  const { fullName, login, email, password } = req.body;
+  try {
+    const options = {
+      fullName,
+      login,
+      email,
+      password,
+    };
+    const result = await users.updateUser(options);
+    res.status(200).send(result.data);
+  } catch (error) {
+    res.status(500).send({
+      err: error || "Can`t update user.",
     });
   }
 }
@@ -61,4 +79,5 @@ module.exports = {
   addUser,
   login,
   deleteUser,
+  updateUser,
 };

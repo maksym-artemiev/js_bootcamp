@@ -1,9 +1,8 @@
 const { User } = require("../db/models/users");
 
-async function getUser({ id }) {
+async function getUser({ _id }) {
   try {
-    const user = await User.findById(id);
-    return user;
+    return User.findOne({_id: _id}).select('-password');
   } catch (error) {
     throw error;
   }
@@ -12,6 +11,15 @@ async function getUser({ id }) {
 async function addUser(options) {
   try {
     const user = await User.create(options);
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function update(options) {
+  try {
+    const user = await User.findOneAndUpdate(options);
     return user;
   } catch (error) {
     throw error;
@@ -40,4 +48,5 @@ module.exports = {
   addUser,
   getUserByName,
   deleteUser,
+  update,
 };

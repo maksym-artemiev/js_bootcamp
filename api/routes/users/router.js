@@ -1,13 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const { toHashPassword } = require('../../middleware/index');
+const { toHashPassword, auth } = require('../../middleware/index');
 
-const { getUser, addUser, login, deleteUser } = require("./controller");
+const { getUser, addUser, login, deleteUser, updateUser } = require("./controller");
 
 router
-.get("/:id", getUser)
+.get("/profile", auth, getUser)
 .post("/",toHashPassword, addUser)
 .post("/login", login)
+.patch("/", toHashPassword, updateUser)
 .delete("/:id", deleteUser);
 
 module.exports = router;

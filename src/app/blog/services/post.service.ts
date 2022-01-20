@@ -20,6 +20,10 @@ export class PostService {
     return this.postDataStream.asObservable();
   }
 
+  public getPostById(id: string | null): Observable<Post> {
+    return this.http.get<Post>(`http://localhost:1994/api/posts/${id}`);
+  }
+
   public updatePostData(post: Post) {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',

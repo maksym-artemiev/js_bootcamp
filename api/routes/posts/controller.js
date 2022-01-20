@@ -14,11 +14,9 @@ async function getPosts(req, res) {
 }
 
 async function getPost(req, res) {
-  const { id } = req.params;
   try {
-    const options = { id };
-    const result = await posts.getPost(options);
-    res.status(200).send(result.data);
+    const result = await posts.getPost(req.params.id);
+    res.status(200).send(result);
   } catch (error) {
     res.status(500).send({
       err: error || "Can`t find a post.",
