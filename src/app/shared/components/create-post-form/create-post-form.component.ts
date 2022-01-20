@@ -47,7 +47,7 @@ export class PostFormComponent {
     this.router.navigate(['home']);
   }
   onSubmit(e: Event) {
-    this.postService.updatePostData({ ...this.form.value, today: new Date() });
+    this.postService.updatePostData({ ...this.form.value, createdAt: new Date() });
     this.router.navigate(['home']);
   }
 }

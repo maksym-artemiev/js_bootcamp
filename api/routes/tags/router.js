@@ -1,14 +1,24 @@
 const express = require("express");
 const router = express.Router();
 
-const { addTag, removeTag } = require("./controller");
+const { getAllTags, getOneTag, createTag, deleteTag } = require("./controller");
 
 router
+.get("/", async(req, res) => {
+  const result = await getAllTags();
+  res.send(result);
+})
+.get("/:id", async (req, res) => {
+  const result = await getOneTag(req.params.id);
+  res.send(result);
+})
   .post("/", async (req, res) => {
-    res.send(await addTag(req.body));
+    const result = await createTag(req.body);
+    res.send(result);
   })
   .delete("/:id", async (req, res) => {
-    res.send(await removeTag(req.params.id));
+    const result = await deleteTag(req.params.id);
+    res.send(result);
   });
 
 module.exports = router;

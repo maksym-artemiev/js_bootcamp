@@ -28,6 +28,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, {
       initialNavigation: 'enabled',
+      onSameUrlNavigation: 'reload'
     }),
   ],
   exports: [RouterModule],
