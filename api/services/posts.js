@@ -31,9 +31,10 @@ async function addPost(options) {
   }
 }
 
-async function updatePost(options) {
+async function updatePost(id, options) {
   try {
-    await postsDao.updatePost(options);
+    const updatedPost = await postsDao.updatePost(id, options);
+    return updatedPost;
   } catch (error) {
     throw error;
   }

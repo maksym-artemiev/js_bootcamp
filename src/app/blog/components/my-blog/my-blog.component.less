@@ -5,10 +5,82 @@
   align-items: flex-start;
   width: 70%;
   margin: 20px auto;
-  &__posts {
-    width: 70%;
-  }
   &__popular {
     width: 21%;
   }
+}
+
+@import "/src/styles/_variables";
+
+.post-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  &__author {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &__pic {
+      &-icon {
+        height: 45px;
+        width: 45px;
+        font-size: 45px;
+      }
+    }
+    &__info {
+      margin-left: 20px;
+      &-name {
+        color: @color-primary;
+        font-size: 19px;
+        font-weight: 500;
+        margin: 0;
+      }
+    }
+  }
+
+  &__like {
+    &-icon {
+      height: 16px;
+      width: 16px;
+      font-size: 16px;
+      color: @icon-like-color;
+    }
+    &-number {
+      margin: 0;
+    }
+  }
+}
+
+.post {
+  margin: 15px;
+}
+
+.post-about {
+  &__title {
+    margin: 0;
+  }
+  &__preview {
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  &__read {
+    cursor: pointer;
+    border: 2px solid @color-primary;
+    padding: 3px;
+    border-radius: 10px;
+  }
+}
+
+hr {
+  margin: 10px auto;
+}
+
+.posts-viewport {
+  height: 85vh;
+  width: 75%;
 }

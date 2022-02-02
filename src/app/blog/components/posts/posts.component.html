@@ -1,4 +1,4 @@
-<div *ngFor="let post of (posts | async)" class="post">
+<div class="post">
   <hr />
   <div class="post-info">
     <div class="post-info__author">
@@ -15,9 +15,8 @@
       </div>
     </div>
     <div
-      [class.post-info__like-is]="post.like && post.like >= 1"
-      class="post-info__like-no"
-      (click)="onClick(post)"
+      class="post-info__like"
+      (click)="toggleLike(post._id)"
     >
       <mat-icon class="post-info__like-icon">thumb_up</mat-icon>
       <p class="post-info__like-number">{{ post?.like.length }}</p>

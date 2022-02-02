@@ -7,6 +7,7 @@
         placeholder="Ex.: REMOTE MEETING"
         formControlName="title"
         required
+        value="{{ post?.title }}"
       />
       <mat-error *ngIf="isFormInvalid('title')">{{
         getErrorMessage("title")
@@ -21,6 +22,7 @@
         placeholder="Ex.: I write about..."
         formControlName="about"
         required
+        value="{{ post?.about }}"
       ></textarea>
       <mat-error *ngIf="isFormInvalid('about')">{{
         getErrorMessage("about")

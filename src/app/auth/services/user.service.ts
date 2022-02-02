@@ -10,12 +10,10 @@ const options = {
 @Injectable({
   providedIn: 'root',
 })
-
 export class UserService {
   user!: User;
   private userDataStream = new BehaviorSubject<User>(this.user);
   constructor(private http: HttpClient) {}
-
 
   public getUser(): Observable<User> {
     return this.http.get<any>('http://localhost:1994/api/users/profile');
@@ -35,21 +33,10 @@ export class UserService {
         },
       });
   }
-  // public updateUserData(user: User) {
-  //   let headers = new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //   });
-  //   let options = { headers: headers };
-  //   return this.http
-  //     .post<any>('http://localhost:1994/api/users', user, options)
-  //     .subscribe(
-  //       (res) => {
-  //         res;
-  //         this.getUserData();
-  //       },
-  //       (err) => {
-  //         console.log(err.message);
-  //       }
-  //     );
-  // }
+
+  public deleteUser(): Promise<User | undefined> {
+    return this.http
+      .delete<User>('http://localhost:1994/api/users/')
+      .toPromise();
+  }
 }

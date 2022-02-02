@@ -35,9 +35,9 @@ async function getUserByName({ login }) {
   }
 }
 
-async function deleteUser({ id }) {
+async function deleteUser({ _id }) {
   try {
-    await User.findOneAndDelete(id);
+    await User.findByIdAndDelete({_id: _id});
   } catch (error) {
     throw error;
   }

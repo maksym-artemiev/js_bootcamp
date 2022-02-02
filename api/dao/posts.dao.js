@@ -1,6 +1,6 @@
 const { Post } = require("../db/models/posts");
-const { Like } = require("../db/models/likes");
-const { Comment } = require("../db/models/comments");
+// const { Like } = require("../db/models/likes");
+// const { Comment } = require("../db/models/comments");
 const { tagsDao } = require("./tags.dao");
 const async = require("async");
 
@@ -51,20 +51,19 @@ async function addPost(options) {
   }
 }
 
-async function updatePost({ id, options }) {
+async function updatePost(id, options) {
   try {
-    await Post.findOneAndUpdate(id, options);
+    
+    const result = await Post.findByIdAndUpdate({_id: id}, options, {new: true});
+    return result;
   } catch (error) {
     throw error;
   }
 }
 
-async function deletePost(options) {
-  const { id } = options;
+async function deletePost(_id) {
   try {
-    const result = await Post.findOneAndDelete({ id });
-    await Comment.deleteMany({ id: { $in: result.comments } });
-    await Like.deleteMany({ id: { $in: result.comments } });
+    return Post.findOneAndDelete({_id: _id});
   } catch (error) {
     throw error;
   }

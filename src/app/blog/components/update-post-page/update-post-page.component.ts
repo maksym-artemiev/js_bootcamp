@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PostService } from '../../../blog/services/post.service';
-import { Router } from '@angular/router';
-import { FormErrors } from './create-post-form.interface';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormErrors } from '../../../shared/components/create-post-form/create-post-form.interface';
+import { Post } from '../posts/post.interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-form',
-  templateUrl: './create-post-form.component.html',
-  styleUrls: ['./create-post-form.component.less'],
+  selector: 'app-update-post-page',
+  templateUrl: './update-post-page.component.html',
+  styleUrls: ['./update-post-page.component.less'],
 })
-export class PostFormComponent implements OnInit {
+export class UpdatePostPageComponent implements OnInit {
+  post!: Post;
   form!: FormGroup;
   errors: FormErrors = {
     required: 'You must enter a value',
@@ -18,13 +21,24 @@ export class PostFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private activatedRoute: ActivatedRoute,
     private router: Router,
-    private postService: PostService
+    private postService: PostService,
+    private snackBar: MatSnackBar
   ) {}
+
   ngOnInit(): void {
+    this.getPost();
     this.form = this.formBuilder.group({
       title: ['', [Validators.required, Validators.minLength(10)]],
       about: ['', [Validators.required, Validators.minLength(10)]],
+    });
+  }
+
+  getPost(): void {
+    const id = this.activatedRoute.snapshot.paramMap.get('id')!;
+    this.postService.getPostById(id).subscribe((post: Post) => {
+      this.post = post;
     });
   }
 
@@ -46,10 +60,19 @@ export class PostFormComponent implements OnInit {
     this.router.navigate(['home']);
   }
   onSubmit(e: Event) {
-    this.postService.updatePostData({
-      ...this.form.value,
-      createdAt: new Date(),
-    });
+    const id = this.activatedRoute.snapshot.paramMap.get('id')!;
+    this.postService.updateSelectedPost(
+      {
+        ...this.form.value,
+        createdAt: new Date(),
+      },
+      id
+    );
     this.router.navigate(['home']);
+    this.snackBar.open('You successfully updated a post!', '', {
+      duration: 2000,
+      horizontalPosition: 'end',
+      verticalPosition: 'bottom',
+    });
   }
 }

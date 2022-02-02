@@ -3,7 +3,9 @@
   <div class="post-info">
     <div class="post-info__author">
       <div class="post-info__author__pic">
-        <mat-icon class="post-info__author__pic-icon">sentiment_very_satisfied</mat-icon>
+        <mat-icon class="post-info__author__pic-icon"
+          >sentiment_very_satisfied</mat-icon
+        >
       </div>
       <div class="post-info__author__info">
         <p class="post-info__author__info-name">{{ post.author.fullName }}</p>
@@ -12,13 +14,50 @@
         </p>
       </div>
     </div>
-    <div [class.post-info__like-is]="post.like && post.like >= 1" class="post-info__like-no">
+    <div class="post-info__like" (click)="toggleLike(post._id)">
       <mat-icon class="post-info__like-icon">thumb_up</mat-icon>
       <p class="post-info__like-number">{{ post?.like.length }}</p>
     </div>
   </div>
   <div class="post-about">
-    <h2 class="post-about__title">{{ post.title }}</h2>
-    <p class="post-about__preview">{{ post.about }}</p>
+    <div class="post-about__info">
+      <h2 class="post-about__title">{{ post.title }}</h2>
+      <p class="post-about__preview">{{ post.about }}</p>
+      <div class="post-editor">
+        <button
+          *ngIf="isSameAuthor"
+          mat-raised-button
+          color="accent"
+          type="button"
+          class="post-about__button"
+          (click)="onPageRoute(post._id)"
+        >
+          Edit Post
+        </button>
+        <button
+          *ngIf="isSameAuthor"
+          mat-raised-button
+          color="warn"
+          type="button"
+          class="post-about__button"
+          (click)="deletePost()"
+        >
+          Delete Post
+        </button>
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="post-comment">
+    <h2>Comments</h2>
+
+    <app-comments-list></app-comments-list>
+
+    <app-create-comments
+      *ngIf="authorized; else notLogged"
+    ></app-create-comments>
+    <ng-template #notLogged
+      ><h3>Only authorized user can comment a post!</h3></ng-template
+    >
   </div>
 </div>

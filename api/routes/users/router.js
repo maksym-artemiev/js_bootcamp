@@ -9,6 +9,6 @@ router
 .post("/",toHashPassword, addUser)
 .post("/login", login)
 .patch("/", toHashPassword, updateUser)
-.delete("/:id", deleteUser);
+.delete("/", auth, deleteUser);
 
 module.exports = router;

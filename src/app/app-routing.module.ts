@@ -6,6 +6,7 @@ import { LoginComponent } from './auth/components/login/login.component';
 import { RegistrationComponent } from './auth/components/registration/registration.component';
 import { UserComponent } from './auth/components/user/user.component';
 import { PostPageComponent } from './blog/components/post-page/post-page.component';
+import { UpdatePostPageComponent } from './blog/components/update-post-page/update-post-page.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: 'posts/:id',
     component: PostPageComponent,
+  },
+  {
+    path: 'edit-post/:id',
+    component: UpdatePostPageComponent,
   },
   {
     path: '**',

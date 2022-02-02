@@ -7,7 +7,7 @@ async function getUser(req, res) {
     res.status(200).send(result.data);
   } catch (error) {
     res.status(500).send({
-      err: error || "Can`t find user.",
+      err: "Can`t find user." || error,
     });
   }
 }
@@ -25,7 +25,7 @@ async function addUser(req, res) {
     res.status(200).send(result.data);
   } catch (error) {
     res.status(500).send({
-      err: error || "Can`t create user.",
+      err: "Can`t create user." || error,
     });
   }
 }
@@ -43,33 +43,33 @@ async function updateUser(req, res) {
     res.status(200).send(result.data);
   } catch (error) {
     res.status(500).send({
-      err: error || "Can`t update user.",
+      err: "Can`t update user." || error,
     });
   }
 }
 
 async function login(req, res) {
-  const {login, password} = req.body;
+  const { login, password } = req.body;
   try {
-    const options = {login, password};
+    const options = { login, password };
     const result = await users.login(options);
     res.status(200).send(result);
   } catch (error) {
     res.status(500).send({
-      err: error || "Login error."
-    })
+      err: "Login error." || error,
+    });
   }
 }
 
-async function deleteUser(req, res) {
-  const { id } = req.params;
+function deleteUser(req, res) {
+  const { _id } = req.ctx.requester;
   try {
-    const result = await users.deleteUser({ id });
-    res.status(200).send(result.data);
+    const result = users.deleteUser({ _id });
+    res.status(200).send(result);
   } catch (error) {
     res.status(500).send({
       err:
-        error || "Can`t find and delete user with selected id, look at error.",
+        "Can`t find and delete user with selected id, look at error." || error,
     });
   }
 }

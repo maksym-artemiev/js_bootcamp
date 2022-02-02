@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { auth, checkAccess } = require("../../middleware/index");
+const { auth } = require("../../middleware/index");
 
 const {
   getPosts,
@@ -8,13 +8,15 @@ const {
   addPost,
   updatePost,
   deletePost,
+  toggleLike
 } = require("./controller");
 
 router
   .get("/", getPosts)
-  .get("/:id", auth, getPost)
+  .get("/:id", getPost)
   .post("/", auth, addPost)
-  .patch("/:id", auth, checkAccess, updatePost)
-  .delete("/:id", auth, checkAccess, deletePost);
+  .patch("/:id", auth, updatePost)
+  .patch("/like/:id", toggleLike)
+  .delete("/:id", auth, deletePost);
 
 module.exports = router;

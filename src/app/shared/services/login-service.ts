@@ -5,21 +5,25 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class LogService {
-  authorized: BehaviorSubject<string|null> = new BehaviorSubject(localStorage.getItem('user_name'));
+  authorized: BehaviorSubject<string | null> = new BehaviorSubject(
+    localStorage.getItem('user_name')
+  );
 
   public setInfo(token: string, username: string) {
     localStorage.setItem('id_token', token);
     localStorage.setItem('user_name', username);
+    localStorage.setItem('id', JSON.parse(atob(token.split('.')[1]))._id);
     this.authorized.next(username);
   }
 
-  isAuthenticated(): Observable<string|null> {
+  isAuthenticated(): Observable<string | null> {
     return this.authorized.asObservable();
   }
 
   public cleanInfo() {
     localStorage.removeItem('id_token');
     localStorage.removeItem('user_name');
+    localStorage.removeItem('id');
     this.authorized.next(null);
   }
 }

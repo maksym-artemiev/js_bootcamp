@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../user/user.interface';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { LogService } from 'src/app/shared/services/login-service';
 
 @Component({
   selector: 'app-user',
@@ -17,7 +18,8 @@ export class UserComponent implements OnInit {
     private userService: UserService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private loger: LogService
   ) {}
 
   ngOnInit(): void {
@@ -48,6 +50,17 @@ export class UserComponent implements OnInit {
   openSnackBar(): void {
     this.snackBar.open('You successfuly changed your profile', 'Ok)', {
       duration: 5000,
+    });
+  }
+
+  public async deleteAndSignOut(): Promise<void> {
+    await this.userService.deleteUser();
+    this.loger.cleanInfo();
+    this.router.navigate(['home']);
+    this.snackBar.open('You delete your profile from our resourse...', 'Ok)', {
+      duration: 5000,
+      horizontalPosition: 'end',
+      verticalPosition: 'bottom',
     });
   }
 
