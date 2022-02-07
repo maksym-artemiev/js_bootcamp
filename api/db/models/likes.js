@@ -7,6 +7,10 @@ const likeSchema = Schema({
     type: Schema.Types.ObjectId,
     required: true,
   },
+  createdAt: {
+    type: Date,
+    required: true,
+  },
 });
 
 const Like = mongoose.model("Like", likeSchema);

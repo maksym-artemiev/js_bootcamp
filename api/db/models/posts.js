@@ -2,8 +2,9 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const postSchema = Schema({
-  name: {
-    type: String,
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
     required: true,
   },
   title: {
@@ -18,7 +19,7 @@ const postSchema = Schema({
     type: Date,
     required: true,
   },
-  like: [{ type: Schema.Types.ObjectId, ref: "Like" }],
+  like: [{ type: Schema.Types.ObjectId, ref: "User" }],
   comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
   tags: [
     {

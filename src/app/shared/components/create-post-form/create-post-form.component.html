@@ -1,20 +1,6 @@
 <form class="contacts-form" [formGroup]="form" (submit)="onSubmit($event)">
   <div class="contacts-form__item">
     <mat-form-field appearance="fill">
-      <mat-label>Your full name</mat-label>
-      <input
-        matInput
-        placeholder="Ex.: Maksym Artemiev"
-        formControlName="name"
-        required
-      />
-      <mat-error *ngIf="isFormInvalid('name')">{{
-        getErrorMessage("name")
-      }}</mat-error>
-    </mat-form-field>
-  </div>
-  <div class="contacts-form__item">
-    <mat-form-field appearance="fill">
       <mat-label>Title of your new post</mat-label>
       <input
         matInput
@@ -30,12 +16,12 @@
   <div class="contacts-form__item">
     <mat-form-field appearance="fill">
       <mat-label>Your news for publishing</mat-label>
-      <input
+      <textarea
         matInput
         placeholder="Ex.: I write about..."
         formControlName="about"
         required
-      />
+      ></textarea>
       <mat-error *ngIf="isFormInvalid('about')">{{
         getErrorMessage("about")
       }}</mat-error>
@@ -46,7 +32,7 @@
       mat-raised-button
       type="submit"
       class="contacts-form__item--submit"
-      [disabled]="form?.touched && !form?.valid"
+      [disabled]="form?.untouched || !form?.valid"
     >
       Send <mat-icon class="icon-send">send</mat-icon>
     </button>

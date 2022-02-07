@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const likeSchema = Schema({
+const tagSchema = Schema({
   tagName: {
     type: String,
     required: true,
@@ -16,6 +16,6 @@ const likeSchema = Schema({
   ],
 });
 
-const Tag = mongoose.model("Tag", likeSchema);
+const Tag = mongoose.model("Tag", tagSchema);
 
 module.exports = { Tag };

@@ -1,0 +1,77 @@
+<div *ngIf="post" class="post">
+  <hr />
+  <div class="post-info">
+    <div class="post-info__author">
+      <div class="post-info__author__pic">
+        <mat-icon class="post-info__author__pic-icon"
+          >sentiment_very_satisfied</mat-icon
+        >
+      </div>
+      <div class="post-info__author__info">
+        <p class="post-info__author__info-name">{{ post.author.fullName }}</p>
+        <p class="post-info__author__info-date">
+          {{ post?.createdAt | date: "longDate" }}
+        </p>
+      </div>
+    </div>
+    <div class="post-info__like" (click)="toggleLike(post._id)">
+      <mat-icon class="post-info__like-icon">thumb_up</mat-icon>
+      <p class="post-info__like-number">{{ post?.like.length }}</p>
+    </div>
+  </div>
+  <div class="post-about">
+    <div class="post-about__info">
+      <h2 class="post-about__title">{{ post.title }}</h2>
+      <p class="post-about__preview">{{ post.about }}</p>
+      <div class="post-editor">
+        <button
+          *ngIf="isSameAuthor"
+          mat-raised-button
+          color="accent"
+          type="button"
+          class="post-about__button"
+          (click)="onPageRoute(post._id)"
+        >
+          Edit Post
+        </button>
+        <button
+          *ngIf="isSameAuthor"
+          mat-raised-button
+          color="warn"
+          type="button"
+          class="post-about__button"
+          (click)="deletePost()"
+        >
+          Delete Post
+        </button>
+      </div>
+      <div class="post-back">
+        <button
+          mat-stroked-button
+          color="primary"
+          type="button"
+          class="post-about__button__back"
+          (click)="backToList()"
+        >
+          Back to the list of posts
+        </button>
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="post-comment">
+    <h2>Comments</h2>
+
+    <app-comments-list></app-comments-list>
+
+    <app-create-comments
+      class="comment-create"
+      *ngIf="authorized; else notLogged"
+    ></app-create-comments>
+    <ng-template #notLogged
+      ><h3 class="comment-create-info">
+        Please authorize in the system for leaving a comment.
+      </h3></ng-template
+    >
+  </div>
+</div>

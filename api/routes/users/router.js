@@ -1,34 +1,14 @@
 const express = require("express");
 const router = express.Router();
+const { toHashPassword, auth } = require('../../middleware/index');
 
-const {
-  getAllUsers,
-  getUser,
-  addUser,
-  updateUser,
-  deleteUser,
-} = require("./controller");
+const { getUser, addUser, login, deleteUser, updateUser } = require("./controller");
 
 router
-  .get("/", async (req, res) => {
-    const result = await getAllUsers();
-    res.send(result);
-  })
-  .get("/:id", async (req, res) => {
-    const result = await getUser(req.params.id);
-    res.send(result);
-  })
-  .post("/", async (req, res) => {
-    const result = await addUser(req.body);
-    res.send(result);
-  })
-  .patch("/:id", async (req, res) => {
-    const result = await updateUser(req.params.id, req.body);
-    res.send(result);
-  })
-  .delete("/:id", async (req, res) => {
-    const result = await deleteUser(req.params.id);
-    res.send(result);
-  });
+.get("/profile", auth, getUser)
+.post("/",toHashPassword, addUser)
+.post("/login", login)
+.patch("/", toHashPassword, updateUser)
+.delete("/", auth, deleteUser);
 
 module.exports = router;

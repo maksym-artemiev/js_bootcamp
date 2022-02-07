@@ -1,0 +1,77 @@
+<form class="auth-reg-form" [formGroup]="form" (submit)="onFormSubmit($event)">
+  <mat-form-field appearance="fill">
+    <mat-label>Your full name</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="fullName"
+      placeholder="Ex. Maksym Artemiev"
+      required
+    />
+    <mat-error *ngIf="isFormInvalid('fullName')">
+      Full Name is <strong>required, minimum</strong> 2 symbols,
+      <strong>maximum</strong> 20 symbols
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Login/username</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="login"
+      placeholder="Ex. max_art"
+      required
+    />
+    <mat-error *ngIf="isFormInvalid('login')">
+      Login is <strong>required, minimum</strong> 4 symbols
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input
+      type="email"
+      matInput
+      formControlName="email"
+      placeholder="Ex. patrick@gmail.com"
+      required
+    />
+    <mat-error *ngIf="isFormInvalid('email')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input
+      type="password"
+      matInput
+      formControlName="password"
+      placeholder="Ex. Pass_woRd"
+      required
+    />
+    <mat-error *ngIf="isFormInvalid('password')">
+      Password is <strong>required and minimum</strong> 5 symbols
+    </mat-error>
+  </mat-form-field>
+
+  <button
+    mat-stroked-button
+    color="primary"
+    type="submit"
+    [disabled]="form?.untouched || !form?.valid"
+    (click)="openSnackBar()"
+  >
+    Register
+  </button>
+  <hr />
+  <button
+    mat-stroked-button
+    color="accent"
+    (click)="onLoginBack()"
+    type="button"
+  >
+    Return to Login
+  </button>
+</form>

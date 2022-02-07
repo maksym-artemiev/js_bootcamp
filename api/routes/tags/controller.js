@@ -1,46 +1,53 @@
-const mongoose = require("mongoose");
-const { Tag } = require("../../db/models/tags");
+const { tags } = require("../../services/index");
 
-async function getAllTags() {
+async function getAllTags(req, res) {
   try {
-    return Tag.find({});
+    const result = await tags.getAllTags();
+    res.status(200).send(result.data);
   } catch (error) {
-    console.log("Can`t find a list of tags:", error);
-  }
-}
-
-async function getOneTag(id) {
-  try {
-    const result = await Tag.findOne(id);
-    return result;
-  } catch (error) {
-    console.log("Can`t find tag:", error);
-  }
-}
-
-async function createTag(data) {
-  try {
-    const tag = new Tag({
-      tagName: data.tagName,
-      postId: [],
+    res.status(500).send({
+      err: error || "Can`t find a list of tags.",
     });
-    tag.save();
-    return {
-      status: 200,
-    };
-  } catch (error) {
-    console.log("Can`t create tag, look at error", error);
   }
 }
 
-async function deleteTag(id) {
+async function getOneTag(req, res) {
+  const { tagName } = req.params;
   try {
-    await Tag.deleteOne({ _id: id });
-    return {
-      status: 200,
-    };
+    const options = { tagName };
+    const result = await tags.getOneTag(options);
+    res.status(200).send(result.data);
   } catch (error) {
-    console.log("Can`t delete or find tag, look at error", error);
+    res.status(500).send({
+      err: error || "Can`t find tag.",
+    });
+  }
+}
+
+async function createTag(req, res) {
+  const { tagName, postId } = req.body;
+  try {
+    const options = { tagName, postId };
+
+    const result = await tags.createTag(options);
+    res.status(200).send(result.data);
+  } catch (error) {
+    res.status(500).send({
+      err: error || "Can`t create tag, look at error.",
+    });
+  }
+}
+
+async function deleteTag(options) {
+  const { id } = req.params;
+  try {
+    const options = { id };
+    const result = await tags.deleteTag(options);
+    res.status(200).send(result.data);
+  } catch (error) {
+    res.status(500).send({
+      err: error || "Can`t delete or find tag, look at error.",
+    });
   }
 }
 

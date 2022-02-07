@@ -1,0 +1,45 @@
+<cdk-virtual-scroll-viewport
+  appendOnly
+  itemSize="50"
+  class="comment-viewport"
+  *ngIf="comments?.length"
+>
+  <div *ngIf="comments?.length">
+    <div class="comment" *ngFor="let comment of comments">
+      <div class="comment-author__info">
+        <mat-icon class="comment-author__icon"
+          >sentiment_very_satisfied</mat-icon
+        >
+        <p class="comment-author__name">{{ comment.author.fullName }}</p>
+      </div>
+      <div class="comment-about">
+        <p class="comment-about__text">{{ comment.textMessage }}</p>
+        <p class="comment-about__text__date">
+          {{ comment.createdAt | date: "MMM d, y, HH:mm " }}
+        </p>
+      </div>
+      <div class="comment-edit">
+        <button
+          mat-mini-fab
+          color="accent"
+          *ngIf="comment.author.fullName === isAuthor"
+          (click)="onPageRoute(comment._id)"
+        >
+          Edit
+        </button>
+        <button
+          mat-mini-fab
+          color="warn"
+          *ngIf="comment.author.fullName === isAuthor"
+          (click)="deleteComment(comment._id)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      <hr />
+    </div>
+  </div>
+</cdk-virtual-scroll-viewport>
+<div *ngIf="!comments?.length">
+  <p class="no-comment">Nobody still not leaves a comment...</p>
+</div>

@@ -1,28 +1,22 @@
 const express = require("express");
 const router = express.Router();
+const { auth } = require("../../middleware/index");
 
-const { getPosts, getPost, addPost, updatePost, deletePost  } = require("./controller");
+const {
+  getPosts,
+  getPost,
+  addPost,
+  updatePost,
+  deletePost,
+  toggleLike
+} = require("./controller");
 
 router
-  .get("/", async (req, res) => {
-    const result = await getPosts();
-    res.send(result);
-  })
-  .get("/:id", async (req, res) => {
-    const result = await getPost(req.params.id);
-    res.send(result);
-  })
-  .post("/", async (req, res) => {
-    const result = await addPost(req.body);
-    res.send(result);
-  })
-  .patch("/:id", async (req, res) => {
-    const result = await updatePost(req.params.id, req.body);
-    res.send(result);
-  })
-  .delete("/:id", async (req, res) => {
-    const result = await deletePost(req.params.id);
-    res.send(result);
-  });
+  .get("/", getPosts)
+  .get("/:id", getPost)
+  .post("/", auth, addPost)
+  .patch("/:id", auth, updatePost)
+  .patch("/like/:id", toggleLike)
+  .delete("/:id", auth, deletePost);
 
 module.exports = router;

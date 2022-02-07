@@ -1,0 +1,106 @@
+<form
+  class="user-update-form"
+  [formGroup]="form"
+  (submit)="onFormSubmit($event)"
+>
+  <mat-form-field appearance="fill">
+    <mat-label>Your full name</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="fullName"
+      placeholder="Ex. Maksym Artemiev"
+      required
+      value="{{ user?.fullName }}"
+    />
+    <mat-error *ngIf="isFormInvalid('fullName')">
+      Full Name is <strong>required, minimum</strong> 2 symbols,
+      <strong>maximum</strong> 20 symbols
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Login/username</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="login"
+      placeholder="Ex. max_art"
+      required
+      value="{{ user?.login }}"
+    />
+    <mat-error *ngIf="isFormInvalid('login')">
+      Login is <strong>required, minimum</strong> 4 symbols
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input
+      type="email"
+      matInput
+      formControlName="email"
+      placeholder="Ex. patrick@gmail.com"
+      required
+      value="{{ user?.email }}"
+    />
+    <mat-error *ngIf="isFormInvalid('email')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input
+      type="password"
+      matInput
+      formControlName="password"
+      placeholder="Ex. Pass_woRd"
+      required
+    />
+    <mat-error *ngIf="isFormInvalid('password')">
+      Password is <strong>required and minimum</strong> 5 symbols
+    </mat-error>
+  </mat-form-field>
+  <div
+    matTooltip="For updating profile rewrite the field above"
+    matTooltipClass="example-tooltip-red"
+    matTooltipPosition="right"
+    matTooltipHideDelay="5000"
+  >
+    <button
+      mat-stroked-button
+      color="primary"
+      type="submit"
+      [disabled]="form?.untouched || !form?.valid"
+      (click)="openSnackBar()"
+    >
+      Update my profile
+    </button>
+  </div>
+  <hr />
+  <button
+    mat-stroked-button
+    color="accent"
+    (click)="onHomeBack()"
+    type="button"
+  >
+    Return to Home
+  </button>
+
+  <div class="delete-field">
+    <button
+      mat-fab
+      color="warn"
+      class="delete-button"
+      type="button"
+      matTooltip="BE CAREFULL: YOU WILL DELETE YOUR PROFILE FROM BLOG BY CLICKING THIS BUTTON"
+      matTooltipClass="example-tooltip-red"
+      matTooltipPosition="above"
+      matTooltipHideDelay="5000"
+      (click)="deleteAndSignOut()"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</form>

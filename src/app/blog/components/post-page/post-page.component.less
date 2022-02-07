@@ -1,0 +1,119 @@
+@import "/src/styles/_variables";
+
+.post {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin: 0 auto;
+  &-editor {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+  }
+}
+
+.post-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  &__author {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &__pic {
+      &-icon {
+        height: 45px;
+        width: 45px;
+        font-size: 45px;
+      }
+    }
+    &__info {
+      margin-left: 20px;
+      &-name {
+        color: @color-primary;
+        font-size: 19px;
+        font-weight: 500;
+        margin: 0;
+      }
+    }
+  }
+
+  &__like {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    background: @background-white;
+    width: 45px;
+    text-align: center;
+    border: 1px solid gray;
+    border-radius: 8px;
+    height: 25px;
+    cursor: pointer;
+    box-shadow: 0 5px #999;
+    &:active {
+      background-color: @color-primary;
+      box-shadow: 0 3px #666;
+      transform: translateY(2px);
+    }
+    &-icon {
+      height: 16px;
+      width: 16px;
+      font-size: 16px;
+      color: @icon-like-color;
+      &:active {
+        color: @background-white;
+      }
+    }
+    &-number {
+      margin: 0;
+    }
+  }
+}
+
+.post-about {
+  &__info {
+    display: flex;
+    flex-direction: column;
+  }
+  &__title {
+    margin: 0;
+  }
+  &__preview {
+    margin: 0;
+  }
+  &__button {
+    margin-top: 5px;
+  }
+}
+
+.mat-divider {
+  margin: 20px 0 10px 0;
+}
+
+.post-back {
+  margin-top: 10px;
+}
+
+.post-comment {
+  border: 1px solid @color-secondary;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.comment-create {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.comment-create-info {
+  margin: 10px;
+  font-style: italic;
+  border: 1px solid @color-secondary;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+}

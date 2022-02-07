@@ -1,0 +1,37 @@
+<form class="contacts-form" [formGroup]="form" (submit)="onSubmit($event)">
+  <div class="contacts-form__item">
+    <mat-form-field appearance="fill">
+      <mat-label>You can leave a comment for this post, lets go!</mat-label>
+      <textarea
+        matInput
+        placeholder="Ex.: I can say that your post is awesome..."
+        formControlName="textMessage"
+        required
+        value="{{ comment?.textMessage }}"
+      ></textarea>
+      <mat-error *ngIf="isFormInvalid('textMessage')">{{
+        getErrorMessage("textMessage")
+      }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="contacts-form__item">
+    <button
+      mat-raised-button
+      type="submit"
+      class="contacts-form__item--submit"
+      [disabled]="form?.untouched || !form?.valid"
+    >
+      Send <mat-icon class="icon-send">send</mat-icon>
+    </button>
+  </div>
+</form>
+<div class="close-button">
+  <button
+    mat-stroked-button
+    color="warn"
+    class="contacts-form__item--close"
+    (click)="close()"
+  >
+    Close <mat-icon class="icon-close">clear</mat-icon>
+  </button>
+</div>

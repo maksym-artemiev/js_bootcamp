@@ -1,5 +1,6 @@
 export interface Post {
-  name: string;
+  _id: string; 
+  author: { fullName: string, _id: string };
   title: string;
   about: string;
   createdAt: Date;

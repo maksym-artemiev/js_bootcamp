@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { PostService } from '../../services/post.service';
+import { Post } from '../../interfaces/post.interface';
 
 @Component({
   selector: 'app-my-blog',
@@ -6,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./my-blog.component.less'],
 })
 export class MyBlogComponent implements OnInit {
-  constructor() {}
+  posts!: Observable<Post[]>;
+  authorized!: string | null;
+  constructor(private postService: PostService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.posts = this.postService.getDataFromServer();
+  }
 }

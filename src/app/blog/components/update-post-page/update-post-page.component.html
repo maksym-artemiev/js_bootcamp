@@ -1,0 +1,50 @@
+<form class="contacts-form" [formGroup]="form" (submit)="onSubmit($event)">
+  <div class="contacts-form__item">
+    <mat-form-field appearance="fill">
+      <mat-label>Title of your new post</mat-label>
+      <input
+        matInput
+        placeholder="Ex.: REMOTE MEETING"
+        formControlName="title"
+        required
+        value="{{ post?.title }}"
+      />
+      <mat-error *ngIf="isFormInvalid('title')">{{
+        getErrorMessage("title")
+      }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="contacts-form__item">
+    <mat-form-field appearance="fill">
+      <mat-label>Your news for publishing</mat-label>
+      <textarea
+        matInput
+        placeholder="Ex.: I write about..."
+        formControlName="about"
+        required
+        value="{{ post?.about }}"
+      ></textarea>
+      <mat-error *ngIf="isFormInvalid('about')">{{
+        getErrorMessage("about")
+      }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="contacts-form__item">
+    <button
+      mat-raised-button
+      type="submit"
+      class="contacts-form__item--submit"
+      [disabled]="form?.untouched || !form?.valid"
+    >
+      Send <mat-icon class="icon-send">send</mat-icon>
+    </button>
+  </div>
+</form>
+<button
+  mat-stroked-button
+  color="warn"
+  class="contacts-form__item--close"
+  (click)="close()"
+>
+  Close <mat-icon class="icon-close">clear</mat-icon>
+</button>
