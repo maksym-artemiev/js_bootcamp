@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { LogService } from 'src/app/shared/services/login-service';
 import { PostService } from '../../services/post.service';
-import { Post } from './post.interface';
+import { Post } from '../../interfaces/post.interface';
 
 @Component({
   selector: 'app-posts',

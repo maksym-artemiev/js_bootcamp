@@ -25,17 +25,14 @@ export class LoginComponent implements OnInit {
   onFormSubmit(e: Event) {
     this.loginService.login(this.form.value);
     this.form.reset();
+    this.snackBar.open('You successfuly login', 'Ok.', {
+      duration: 5000,
+    });
     this.router.navigate(['home']);
   }
 
   onRegistrationBack(): void {
     this.router.navigate(['registration']);
-  }
-
-  openSnackBar(): void {
-    this.snackBar.open('You successfuly login', 'Ok.', {
-      duration: 5000,
-    });
   }
 
   ngOnInit(): void {

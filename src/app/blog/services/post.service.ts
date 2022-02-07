@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { Post } from '../components/posts/post.interface';
+import { Post } from '../interfaces/post.interface';
 
 const options = {
   headers: new HttpHeaders({ 'Content-type': 'application/json' }),

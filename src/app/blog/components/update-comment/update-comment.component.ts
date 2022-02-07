@@ -1,44 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PostService } from '../../../blog/services/post.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormErrors } from '../../../shared/components/create-post-form/create-post-form.interface';
-import { Post } from '../../interfaces/post.interface';
+import { FormErrors } from '../../interfaces/create-comment-errors-interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Comment } from '../../interfaces/comment.interface';
+import { CommentService } from '../../services/comments.service';
 
 @Component({
-  selector: 'app-update-post-page',
-  templateUrl: './update-post-page.component.html',
-  styleUrls: ['./update-post-page.component.less'],
+  selector: 'app-update-comment',
+  templateUrl: './update-comment.component.html',
+  styleUrls: ['./update-comment.component.less'],
 })
-export class UpdatePostPageComponent implements OnInit {
-  post!: Post;
+export class UpdateCommentComponent implements OnInit {
+  comment!: Comment;
   form!: FormGroup;
   errors: FormErrors = {
     required: 'You must enter a value',
-    minlength: 'Write your title/description* Min. 10 symbols',
+    minlength: 'Write your fealings* Min. 5 symbols',
   };
 
   constructor(
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private postService: PostService,
+    private commentService: CommentService,
     private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    this.getPost();
+    this.getComment();
     this.form = this.formBuilder.group({
-      title: ['', [Validators.required, Validators.minLength(10)]],
-      about: ['', [Validators.required, Validators.minLength(10)]],
+      textMessage: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
 
-  getPost(): void {
+  getComment() {
     const id = this.activatedRoute.snapshot.paramMap.get('id')!;
-    this.postService.getPostById(id).subscribe((post: Post) => {
-      this.post = post;
+    this.commentService.getComment(id).subscribe((comment: Comment) => {
+      this.comment = comment;
     });
   }
 
@@ -59,17 +58,17 @@ export class UpdatePostPageComponent implements OnInit {
   public close() {
     this.router.navigate(['home']);
   }
+
   onSubmit(e: Event) {
-    const id = this.activatedRoute.snapshot.paramMap.get('id')!;
-    this.postService.updateSelectedPost(
-      {
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.commentService
+      .updateComment({
         ...this.form.value,
-        createdAt: new Date(),
-      },
-      id
-    );
+        _id: id,
+      })
+      .toPromise();
     this.router.navigate(['home']);
-    this.snackBar.open('You successfully updated a post!', '', {
+    this.snackBar.open('You successfully updated a comment!', '', {
       duration: 2000,
       horizontalPosition: 'end',
       verticalPosition: 'bottom',

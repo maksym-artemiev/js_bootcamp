@@ -1,0 +1,29 @@
+@import "/src/styles/_variables";
+
+.contacts-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 70%;
+  &__item {
+    &--submit {
+      background: @button-submit;
+      margin-left: 10px;
+    }
+    &--close {
+      display: block;
+      margin: 10px auto 0;
+    }
+  }
+}
+
+.icon-close,
+.icon-send {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+
+form {
+  margin: 10px 0 10px 0;
+}

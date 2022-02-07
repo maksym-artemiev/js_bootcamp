@@ -17,6 +17,11 @@ import { PostPageComponent } from './components/post-page/post-page.component';
 import { CreateCommentsComponent } from './components/create-comments/create-comments.component';
 import { CommentsListComponent } from './components/comments-list/comments-list.component';
 import { UpdatePostPageComponent } from './components/update-post-page/update-post-page.component';
+import { UpdateCommentComponent } from './components/update-comment/update-comment.component';
+import { UserService } from '../auth/services/user.service';
+import { RegistrationService } from '../auth/services/registration.service';
+import { LoginServise } from '../auth/services/login.servise';
+import { LogService } from '../shared/services/login-service';
 
 @NgModule({
   declarations: [
@@ -27,6 +32,7 @@ import { UpdatePostPageComponent } from './components/update-post-page/update-po
     CreateCommentsComponent,
     CommentsListComponent,
     UpdatePostPageComponent,
+    UpdateCommentComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +45,7 @@ import { UpdatePostPageComponent } from './components/update-post-page/update-po
     MatInputModule,
     MatSnackBarModule,
   ],
+  providers: [UserService, RegistrationService, LoginServise, LogService],
   exports: [MyBlogComponent],
 })
 export class BlogModule {}

@@ -7,6 +7,7 @@
         placeholder="Ex.: I can say that your post is awesome..."
         formControlName="textMessage"
         required
+        value="{{ comment?.textMessage }}"
       ></textarea>
       <mat-error *ngIf="isFormInvalid('textMessage')">{{
         getErrorMessage("textMessage")
@@ -24,3 +25,13 @@
     </button>
   </div>
 </form>
+<div class="close-button">
+  <button
+    mat-stroked-button
+    color="warn"
+    class="contacts-form__item--close"
+    (click)="close()"
+  >
+    Close <mat-icon class="icon-close">clear</mat-icon>
+  </button>
+</div>

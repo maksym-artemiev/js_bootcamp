@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LogService } from 'src/app/shared/services/login-service';
 
 import { PostService } from '../../services/post.service';
-import { Post } from '../posts/post.interface';
+import { Post } from '../../interfaces/post.interface';
 
 @Component({
   selector: 'app-post-page',
@@ -66,6 +66,10 @@ export class PostPageComponent implements OnInit {
         verticalPosition: 'bottom',
       });
     }
+  }
+
+  public backToList() {
+    this.router.navigate(['home']);
   }
 
   ngOnInit(): void {

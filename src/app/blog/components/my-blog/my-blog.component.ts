@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PostService } from '../../services/post.service';
-import { Post } from '../posts/post.interface';
+import { Post } from '../../interfaces/post.interface';
 
 @Component({
   selector: 'app-my-blog',

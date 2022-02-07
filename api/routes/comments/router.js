@@ -3,14 +3,16 @@ const router = express.Router();
 
 const {
   addComment,
-  getOneComment,
+  getComments,
+  getComment,
   deleteComment,
   updateComment,
 } = require("./controller");
 
 router
   .post("/", addComment)
-  .get("/:id", getOneComment)
+  .get("/", getComments)
+  .get("/:id", getComment)
   .patch("/:id", updateComment)
   .delete("/:id", deleteComment);
 

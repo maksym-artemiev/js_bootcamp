@@ -10,7 +10,10 @@ const options = {
   providedIn: 'root',
 })
 export class LoginServise {
-  constructor(private http: HttpClient, private log: LogService) {}
+  constructor(
+    private http: HttpClient, 
+    private log: LogService,
+) {}
 
   public login(data: Object) {
     return this.http

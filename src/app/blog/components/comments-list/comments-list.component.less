@@ -1,0 +1,61 @@
+@import "../../../../styles/_variables.less";
+
+.no-comment {
+  font-size: 16px;
+  font-style: italic;
+  letter-spacing: 3px;
+  text-align: center;
+}
+
+.comment {
+  margin: 3px;
+  &-author {
+    &__info {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    &__icon {
+      height: 30px;
+      width: 30px;
+      font-size: 30px;
+    }
+    &__name {
+      margin: 0 0 0 10px;
+      font-size: 16px;
+      font-weight: 500;
+      color: @color-primary;
+    }
+  }
+  &-about {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    &__text {
+      word-break: break-all;
+      width: 70%;
+    }
+  }
+  &-edit {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
+}
+
+button {
+  margin-left: 10px;
+}
+
+hr {
+  width: 95%;
+  height: 3px;
+  border: 1px solid @color-secondary;
+}
+
+.comment-viewport {
+  height: 28vh;
+  width: 95%;
+  margin: 0 auto;
+}
